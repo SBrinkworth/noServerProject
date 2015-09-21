@@ -1,17 +1,50 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>SB Pok&eacute;dex</title>
-    <link rel="stylesheet" href="styles/style.css">
-  </head>
-  <body>
+<html ng-app="pokeApp">
 
+<head>
+  <meta charset="utf-8">
+  <title>SB Pok&eacute;dex</title>
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
 
+<body ng-controller="mainCtrl">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/controllers/mainCtrl.js"></script>
-  </body>
+  <div class="header">
+    <a href="#/">
+      <div class="logo logoText">
+        <img src="http://cdn.bulbagarden.net/upload/1/1b/Pokedex_logo.png" />
+      </div>
+    </a>
+    <div class="logo pokeball">
+      <img src="http://img03.deviantart.net/49cf/i/2011/068/a/c/pokeball_desktop_icon_by_beccerberry-d3b98cf.png" />
+    </div>
+  </div>
+
+  <div ng-view></div>
+
+  <div class="runningPokemon">
+    <div class="running" id="pikachu">
+      <img src="http://38.media.tumblr.com/fe61dc2b7ef08a538b906eced7fa5cb5/tumblr_mmpic5R7931rkbi87o1_500.gif" />
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>∫
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="js/jQuery.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/mainCtrl.js"></script>
+  <script src="js/services/pokeService.js"></script>
+  <script src="js/services/pokeForumService.js"></script>
+  <script src="js/routes/home/homeCtrl.js"></script>
+  <script src="js/routes/pokedex/pokedexCtrl.js"></script>
+  <script src="js/routes/pokeforum/pokeforumCtrl.js"></script>
+  <script src="js/routes/forumThread/forumThreadCtrl.js"></script>
+  <script src="js/directives/pokemon/pokemonDir.js"></script>
+  <script src="js/directives/pokedex/pokedexDir.js"></script>
+</body>
+
 </html>

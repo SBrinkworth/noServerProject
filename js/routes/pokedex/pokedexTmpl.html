@@ -1,0 +1,13 @@
+<div class="pokedexWindow">
+  <div class="pokedex box">
+    <input ng-model="search" placeholder="Search Pok&eacute;mon">
+    <div class="noScroll">
+      <div ng-repeat="pokemon in pokedex | filter: search | orderBy: '+id'">
+        <pokedex-dir pokemon='pokemon' selected="selected(id)"></pokedex-dir>
+      </div>
+    </div>
+  </div>
+  <div class="pokemonInfo box">
+    <pokemon-dir pokemon="selectedPokemon" description="pokemonDescription" picture="pokemonSprite"></pokemon-dir>
+  </div>
+</div>

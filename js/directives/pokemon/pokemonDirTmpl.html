@@ -1,0 +1,81 @@
+<div class="noScroll nsp">
+  <div class="pokemon">
+    <div class="entrieName" id="pokemonName">
+      {{pokemon.name}}
+    </div>
+    <div class="pokemonDescription">
+      <img ng-src={{picture}} />
+      <h3>Stats and Info</h3>
+      <div class="disc">
+        <div class="twoColumn">
+          <div class="info">
+            ID: {{pokemon.pkdx_id}}
+          </div>
+          <div class="info">
+            Height: {{height}}
+          </div>
+          <div class="info">
+            Weight: {{weight}}
+          </div>
+          <div class="info">
+            Species: {{pokemon.species}}
+          </div>
+          <div class="info">
+            M/F Ratio: {{pokemon.male_female_ratio}}
+          </div>
+          <div class="info">
+            Growth Rate: {{pokemon.growth_rate}}
+          </div>
+        </div>
+        <div class="twoColumn">
+          <div class="info">
+            HP: {{pokemon.hp}}
+          </div>
+          <div class="info">
+            Attack: {{pokemon.attack}}
+          </div>
+          <div class="info">
+            Defense: {{pokemon.defense}}
+          </div>
+          <div class="info">
+            SP-Attack: {{pokemon.sp_atk}}
+          </div>
+          <div class="info">
+            SP-Defense: {{pokemon.sp_def}}
+          </div>
+          <div class="info">
+            Speed: {{pokemon.speed}}
+          </div>
+        </div>
+        <div class="description">
+          Description: {{description.description}}
+        </div>
+      </div>
+      <h3>Type's and Abilities</h3>
+      <div class="disc">
+        <div class="twoColumn">
+          <div class="info">
+            Type's:
+            <ul ng-repeat="type in pokemon.types" class="type {{type.name}}">
+              <li>{{type.name}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="twoColumn">
+          <div class="info">
+            Abilities:
+            <ul ng-repeat="ability in pokemon.abilities">
+              <li>{{ability.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <h3>Move's</h3>
+      <div class="disc">
+        <ul class="moves" ng-repeat="move in pokemon.moves">
+          <li class="move">Name: {{move.name}}<br>Learn From: {{move.learn_type}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
