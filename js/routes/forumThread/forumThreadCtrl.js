@@ -11,5 +11,6 @@ angular.module("pokeApp").controller("forumThreadCtrl", function($scope, threadR
       username: username,
       text: text
     });
+    $scope.newCommentText = '';
   };
 });
