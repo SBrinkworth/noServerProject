@@ -4,13 +4,11 @@ angular.module("pokeApp").controller("forumThreadCtrl", function($scope, threadR
 
   if (authData) {
     $scope.logedIn = true;
-    console.log(authData.uid);
     pokeForumService.getUsername(authData.uid).then(function(response) {
       $scope.username = response;
     });
   } else {
-    console.log('not loged in');
-    $scope.username = '';
+    $location.path('/pokeforum');
   }
 
   $scope.logOut = function() {

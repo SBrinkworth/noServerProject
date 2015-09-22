@@ -1,4 +1,4 @@
-angular.module('pokeApp').controller('pokeforumCtrl', function($scope, threadsRef, $firebaseArray, pokeForumService, fb) {
+angular.module('pokeApp').controller('pokeforumCtrl', function($scope, threadsRef, $firebaseArray, pokeForumService, fb, $route) {
   $scope.logedIn = false;
   $scope.threads = $firebaseArray(threadsRef);
   $scope.ref = new Firebase(fb.url);
@@ -37,7 +37,7 @@ angular.module('pokeApp').controller('pokeforumCtrl', function($scope, threadsRe
   function authDataCallback(authData) {
     $scope.authData = authData;
 
-    if ($scope.authData) {
+    if (authData) {
       pokeForumService.getUsername(authData.uid).then(function(response) {
         $scope.user = response;
       });
