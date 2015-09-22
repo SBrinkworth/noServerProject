@@ -339,6 +339,7 @@ button {
   border-bottom: 1px solid gray;
   padding: 20px;
   padding-top: 0px;
+  border-radius: 10px;
 }
 .threadBox a {
   text-decoration: none;
@@ -373,4 +374,9 @@ button {
   font-weight: bold;
   margin: 20px;
   margin-top: 30px;
+}
+.logOut {
+  float: right;
+  margin-top: 30px;
+  margin-right: 20px;
 }

@@ -27,9 +27,6 @@ app.config(function($routeProvider, $httpProvider) {
     resolve: {
       threadsRef: function(pokeForumService) {
         return pokeForumService.getThreads();
-      },
-      isLogedIn: function(pokeForumService) {
-        return pokeForumService.checkForLogin();
       }
     }
   }).when('/pokeforum/:threadId', {

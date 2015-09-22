@@ -1,14 +1,22 @@
-angular.module("pokeApp").service("pokeForumService", function(fb, $firebaseObject, $q, $firebaseArray) {
+angular.module("pokeApp").service("pokeForumService", function(fb, $firebaseObject, $q, $firebaseArray, $firebase) {
   var forumRef = new Firebase(fb.url);
   var baseUrl = fb.url;
-  var isLogedIn = false;
-  var userInfo = {
-    isLogedIn: isLogedIn,
-    username: ''
-  };
 
-  this.checkForLogin = function() {
-    return userInfo;
+  this.getUsername = function(uid) {
+    var defered = $q.defer();
+    var usersRef = new Firebase(baseUrl + '/users');
+    usersRef.once('value', function(wholeSnapshot) {
+      wholeSnapshot.forEach(function(snap) {
+        // console.log(snap.val().id);
+        // console.log(uid);
+        if (uid == snap.val().id) {
+          var username = snap.val().username;
+          defered.resolve(username);
+        }
+      });
+      defered.resolve('Anon');
+    });
+    return defered.promise;
   };
 
   this.getThread = function(threadId) {
@@ -26,8 +34,6 @@ angular.module("pokeApp").service("pokeForumService", function(fb, $firebaseObje
   this.login = function(email, password) {
     var defered = $q.defer();
     var ref = new Firebase(baseUrl);
-    var users = new Firebase(baseUrl + "/users");
-    users = $firebaseArray(users);
     var username = '';
 
     ref.authWithPassword({
@@ -37,17 +43,7 @@ angular.module("pokeApp").service("pokeForumService", function(fb, $firebaseObje
       if (error) {
         alert("Incorrect Email or Password. Please try again.");
       } else {
-        for (var i = 0; i < users.length; i++) {
-          if (users[i].id == authData.uid) {
-            username = users[i].username;
-          }
-        }
-        userInfo = {
-          isLogedIn: true,
-          userData: authData,
-          username: username
-        };
-        defered.resolve(userInfo);
+        defered.resolve(authData);
       }
     });
     return defered.promise;

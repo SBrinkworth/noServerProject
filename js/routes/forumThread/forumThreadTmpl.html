@@ -1,7 +1,9 @@
 <div class="pokeforum">
   <div class="forumTitle">
-    <a href="#/pokeforum">< Back</a>
-    <h1>{{ thread.title }} (by {{ thread.username }})</h1>
+    <a href="#/pokeforum">
+      < Back</a>
+        <button class="logOut" type="button" name="button" ng-click="logOut()">Log Out</button>
+        <h1>{{ thread.title }} (by {{ thread.username }})</h1>
   </div>
 
   <div class="comments">
@@ -13,7 +15,7 @@
   <div class="commentsForm">
     <form name="newCommentForm">
       <input type="text" ng-model="newCommentText" placeholder="Write a comment..." required/>
-      <button ng-disabled="newCommentForm.$invalid" ng-click="createComment(user.username, newCommentText)">Add Comment</button>
+      <button ng-disabled="newCommentForm.$invalid" ng-click="createComment(username, newCommentText)">Add Comment</button>
     </form>
   </div>
 </div>

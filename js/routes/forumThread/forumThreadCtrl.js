@@ -1,6 +1,25 @@
-angular.module("pokeApp").controller("forumThreadCtrl", function($scope, threadRef, $firebaseObject, commentsRef, $firebaseArray, pokeForumService) {
+angular.module("pokeApp").controller("forumThreadCtrl", function($scope, threadRef, $firebaseObject, commentsRef, $firebaseArray, pokeForumService, fb, $location) {
+  var ref = new Firebase(fb.url);
+  var authData = ref.getAuth();
+
+  if (authData) {
+    $scope.logedIn = true;
+    console.log(authData.uid);
+    pokeForumService.getUsername(authData.uid).then(function(response) {
+      $scope.username = response;
+    });
+  } else {
+    console.log('not loged in');
+    $scope.username = '';
+  }
+
+  $scope.logOut = function() {
+    var ref = new Firebase(fb.url);
+    ref.unauth();
+    $location.path('/pokeforum');
+  };
+
   var thread = $firebaseObject(threadRef);
-  $scope.user = pokeForumService.checkForLogin();
 
   thread.$bindTo($scope, 'thread');
 

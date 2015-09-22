@@ -1,15 +1,19 @@
-angular.module('pokeApp').controller('pokeforumCtrl', function($scope, threadsRef, $firebaseArray, pokeForumService, isLogedIn) {
-  $scope.logedIn = isLogedIn.isLogedIn;
+angular.module('pokeApp').controller('pokeforumCtrl', function($scope, threadsRef, $firebaseArray, pokeForumService, fb) {
+  $scope.logedIn = false;
   $scope.threads = $firebaseArray(threadsRef);
-  $scope.newThreadToggle = true;
+  $scope.ref = new Firebase(fb.url);
+  $scope.authData = {};
+  $scope.user = '';
 
   $scope.createThread = function(username, title) {
+    console.log(username);
     var date = new Date();
     $scope.threads.$add({
       username: username,
       title: title,
       created_on: "" + date.getHours() + ":" + date.getMinutes() + " " + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
     });
+    $scope.newThreadTitle = '';
   };
 
   $scope.createUser = function(email, username, password) {
@@ -24,4 +28,21 @@ angular.module('pokeApp').controller('pokeforumCtrl', function($scope, threadsRe
       $scope.user = response.username;
     });
   };
+
+  $scope.logOut = function() {
+    var ref = new Firebase(fb.url);
+    ref.unauth();
+  };
+
+  function authDataCallback(authData) {
+    $scope.authData = authData;
+
+    if ($scope.authData) {
+      pokeForumService.getUsername(authData.uid).then(function(response) {
+        $scope.user = response;
+      });
+    }
+  }
+
+  $scope.ref.onAuth(authDataCallback);
 });

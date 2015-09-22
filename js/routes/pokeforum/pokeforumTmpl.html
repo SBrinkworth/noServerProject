@@ -1,13 +1,15 @@
+<!-- <input type="submit" name="name" value="logout" ng-click='authData.$unauth()'> -->
 <div class="pokeforum">
   <div class="forumTitle">
+    <button class="logOut" type="button" ng-if="authData" name="button" ng-click="logOut()">Log Out</button>
     <h1>Welcome to the Pok&eacute;Forum</h1>
   </div>
-  <div class="formBox newThreadForm" ng-if="logedIn && newThreadToggle">
+  <div class="formBox newThreadForm" ng-if="authData">
     <h3>New Thread</h3>
     <input type="text" ng-model="newThreadTitle" placeholder="New thread name" required/>
     <button ng-disabled="newThreadForm.$invalid" ng-click="createThread(user, newThreadTitle)">Add Thread</button>
   </div>
-  <div class="formBox signInBox" ng-hide="logedIn">
+  <div class="formBox signInBox" ng-if="!authData">
     <div class="loginFormBox">
       <h3>Login</h3>
       <form ng-submit="loginUser(loginEmail, loginPassword)">
@@ -26,41 +28,17 @@
       </form>
     </div>
   </div>
-  <div class="formBox Threads" ng-show="logedIn">
+  <div class="formBox Threads" ng-if="authData">
     <div class="threadBox" ng-repeat="thread in threads">
       <a href="#/pokeforum/{{thread.$id}}">
-      <h1>{{thread.title}} </h1>
-      <div>
-        Created By: {{thread.username}}
-      </div>
-      <div>
-        On: {{thread.created_on}}
-      </div>
+        <h1>{{thread.title}} </h1>
+        <div>
+          Created By: {{thread.username}}
+        </div>
+        <div>
+          On: {{thread.created_on}}
+        </div>
       </a>
     </div>
   </div>
 </div>
-
-<!-- <div class="forumHead">
-  <h1>Welcome to the Pok&eacute;Forums</h1>
-</div>
-<div class="noScroll forumNS">
-  <div class="newThreadForm">
-    <h3>Add a new Thread</h3>
-    <form name="newThreadForm">
-      <input type="text" ng-model="newThreadTitle" placeholder="New thread" required/>
-      <input type="text" ng-model="username" placeholder="Username..." required/>
-      <button ng-disabled="newThreadForm.$invalid" ng-click="createThread(username, newThreadTitle)">Add Thread</button>
-    </form>
-  </div>
-</div>
-<div class="forumList">
-  <ul>
-    <li ng-repeat="thread in threads">
-      <a ng-href="#/pokeforum/{{thread.$id}}">
-        <span>{{ thread.title }}</span>
-        <span>(by {{ thread.username }})</span>
-      </a>
-    </li>
-  </ul>
-</div> -->
